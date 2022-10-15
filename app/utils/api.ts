@@ -2,7 +2,7 @@ const id = "YOUR_CLIENT_ID";
 const sec = "YOUR_SECRET_ID";
 const params = `?client_id=${id}&client_secret=${sec}`;
 
-function getErrorMsg(message, username) {
+function getErrorMsg(message: string, username: string) {
   if (message === "Not Found") {
     return `${username} doesn't exist`;
   }
@@ -10,7 +10,12 @@ function getErrorMsg(message, username) {
   return message;
 }
 
-function getProfile(username) {
+export interface User {
+  id: string;
+  followers: number;
+}
+
+function getProfile(username: string): Promise<User> {
   return fetch(`https://api.github.com/users/${username}${params}`)
     .then((res) => res.json())
     .then((profile) => {
@@ -22,7 +27,7 @@ function getProfile(username) {
     });
 }
 
-function getRepos(username) {
+function getRepos(username: string): Promise<Repo[]> {
   return fetch(
     `https://api.github.com/users/${username}/repos${params}&per_page=100`
   )
@@ -36,18 +41,22 @@ function getRepos(username) {
     });
 }
 
-function getStarCount(repos) {
+export interface Repo {
+  stargazers_count: number;
+}
+
+function getStarCount(repos: Repo[]) {
   return repos.reduce(
     (count, { stargazers_count }) => count + stargazers_count,
     0
   );
 }
 
-function calculateScore(followers, repos) {
+function calculateScore(followers: number, repos: Repo[]) {
   return followers * 3 + getStarCount(repos);
 }
 
-function getUserData(player) {
+function getUserData(player: string): Promise<Player> {
   return Promise.all([getProfile(player), getRepos(player)]).then(
     ([profile, repos]) => ({
       profile,
@@ -56,17 +65,22 @@ function getUserData(player) {
   );
 }
 
-function sortPlayers(players) {
+export interface Player {
+  profile: User;
+  score: number;
+}
+
+function sortPlayers(players: Player[]) {
   return players.sort((a, b) => b.score - a.score);
 }
 
-export function battle(players) {
+export function battle(players: [string, string]) {
   return Promise.all([getUserData(players[0]), getUserData(players[1])]).then(
     (results) => sortPlayers(results)
   );
 }
 
-export function fetchPopularRepos(language) {
+export function fetchPopularRepos(language: string) {
   const endpoint = window.encodeURI(
     `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`
   );
@@ -77,6 +91,6 @@ export function fetchPopularRepos(language) {
       if (!data.items) {
         throw new Error(data.message);
       }
-      return data.items;
+      return data.items as Repo[];
     });
 }

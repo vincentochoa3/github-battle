@@ -1,6 +1,8 @@
-import * as React from "react";
+import React, { ReactNode } from "react";
 
-export default class Hover extends React.Component {
+export default class Hover extends React.Component<{
+  children: (hovering: boolean) => React.ReactNode;
+}> {
   state = { hovering: false };
   mouseOver = () => {
     this.setState({

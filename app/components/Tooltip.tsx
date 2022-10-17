@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties, ReactNode } from "react";
 import PropTypes from "prop-types";
 import Hover from "./Hover";
 
@@ -6,7 +6,7 @@ const styles = {
   container: {
     position: "relative",
     display: "flex",
-  },
+  } as CSSProperties,
   tooltip: {
     boxSizing: "border-box",
     position: "absolute",
@@ -21,10 +21,16 @@ const styles = {
     color: "#fff",
     textAlign: "center",
     fontSize: "14px",
-  },
+  } as CSSProperties,
 };
 
-export default function Tooltip({ text, children }) {
+export default function Tooltip({
+  text,
+  children,
+}: {
+  text: string;
+  children: ReactNode;
+}) {
   return (
     <Hover>
       {(hovering) => (

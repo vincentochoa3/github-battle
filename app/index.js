@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { ThemeProvider } from "./contexts/theme";
+import { ThemeProvider } from "./contexts/theme.ts";
 import Nav from "./components/Nav";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Loading from "./components/Loading";
 
 const Popular = React.lazy(() => import("./components/Popular"));
-const Battle = React.lazy(() => import("./components/Battle"));
+const Battle = React.lazy(() => import("./components/Battle.tsx"));
 const Results = React.lazy(() => import("./components/Results"));
 
 class App extends React.Component {

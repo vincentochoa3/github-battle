@@ -1,5 +1,5 @@
 import React from "react";
-import { battle } from "../utils/api";
+import { battle } from "../utils/api.ts";
 import {
   FaCompass,
   FaBriefcase,
@@ -11,7 +11,7 @@ import {
 import Card from "./Card";
 import PropTypes from "prop-types";
 import Loading from "./Loading";
-import Tooltip from "./Tooltip";
+import Tooltip from "./Tooltip.tsx";
 import queryString from "query-string";
 import { Link } from "react-router-dom";
 

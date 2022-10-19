@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { fetchPopularRepos } from "../utils/api";
+import { fetchPopularRepos } from "../utils/api.ts";
 import {
   FaUser,
   FaStar,
@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import Card from "./Card";
 import Loading from "./Loading";
-import Tooltip from "./Tooltip";
+import Tooltip from "./Tooltip.tsx";
 
 function LanguagesNav({ selected, onUpdateLanguage }) {
   const languages = ["All", "Javascript", "Ruby", "Java", "CSS", "Python"];

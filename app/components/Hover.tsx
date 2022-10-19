@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
 export default class Hover extends React.Component<{
   children: (hovering: boolean) => React.ReactNode;

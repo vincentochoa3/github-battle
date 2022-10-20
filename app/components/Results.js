@@ -112,7 +112,15 @@ export default class Results extends React.Component {
     }
 
     if (error) {
-      return <p className="center-text error">{error}</p>;
+      return (
+        <>
+          <p className="center-text error">{error}</p>;
+          <Link to="/battle" className="btn btn-dark btn-space">
+            Reset
+          </Link>
+          ;
+        </>
+      );
     }
 
     return (

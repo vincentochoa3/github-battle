@@ -84,7 +84,6 @@ ReposGrid.propTypes = {
 
 function popularReducer(state, action) {
   if (action.type === "success") {
-    console.log(state);
     return {
       ...state,
       [action.selectedLanguage]: action.repos,

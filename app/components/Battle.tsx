@@ -140,7 +140,7 @@ export default function Battle() {
     id === "playerOne" ? setPlayerOne("") : setPlayerTwo("");
 
   return (
-    <React.Fragment>
+    <>
       <Instructions />
       <div className="players-container">
         <h1 className="center-text header-lg">Players</h1>
@@ -182,6 +182,6 @@ export default function Battle() {
           </Link>
         )}
       </div>
-    </React.Fragment>
+    </>
   );
 }

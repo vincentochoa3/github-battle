@@ -124,7 +124,7 @@ export default class Results extends React.Component {
     }
 
     return (
-      <React.Fragment>
+      <>
         <div className="grid space-around container-sm">
           <Card
             header={winner.score === loser.score ? "Tie" : "Winner"}
@@ -149,7 +149,7 @@ export default class Results extends React.Component {
         <Link to="/battle" className="btn btn-dark btn-space">
           Reset
         </Link>
-      </React.Fragment>
+      </>
     );
   }
 }

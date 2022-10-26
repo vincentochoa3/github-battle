@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { fetchPopularRepos } from "../utils/api.ts";
+import { fetchPopularRepos, Repo } from "../utils/api";
 import {
   FaUser,
   FaStar,
@@ -9,17 +9,31 @@ import {
 } from "react-icons/fa";
 import Card from "./Card";
 import Loading from "./Loading";
-import Tooltip from "./Tooltip.tsx";
+import Tooltip from "./Tooltip";
 
-function LanguagesNav({ selected, onUpdateLanguage }) {
-  const languages = ["All", "Javascript", "Ruby", "Java", "CSS", "Python"];
+type Languages = "All" | "Javascript" | "Ruby" | "Java" | "CSS" | "Python";
+function LanguagesNav({
+  selected,
+  onUpdateLanguage,
+}: {
+  selected: Languages;
+  onUpdateLanguage: (lang: Languages) => void;
+}) {
+  const languages: Languages[] = [
+    "All",
+    "Javascript",
+    "Ruby",
+    "Java",
+    "CSS",
+    "Python",
+  ];
   return (
     <ul className="flex-center">
       {languages.map((language) => (
         <li key={language}>
           <button
             className="btn-clear nav-link"
-            style={language === selected ? { color: `red` } : null}
+            style={language === selected ? { color: `red` } : undefined}
             onClick={() => onUpdateLanguage(language)}
           >
             {language}
@@ -35,7 +49,7 @@ LanguagesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 };
 
-function ReposGrid({ repos }) {
+function ReposGrid({ repos }: { repos: Repo[] }) {
   return (
     <ul className="grid space-around">
       {repos.map((repo, index) => {

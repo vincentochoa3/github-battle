@@ -95,8 +95,17 @@ function ReposGrid({ repos }: { repos: Repo[] }) {
 ReposGrid.propTypes = {
   repos: PropTypes.array.isRequired,
 };
-
-function popularReducer(state, action) {
+interface PopularState extends Partial<Record<Languages, Repo[]>> {
+  error: null | string;
+}
+type PopularReducerActions =
+  | {
+      type: "success";
+      selectedLanguage: Languages;
+      repos: Repo[];
+    }
+  | { type: "error"; error: Error };
+function popularReducer(state: PopularState, action: PopularReducerActions) {
   if (action.type === "success") {
     return {
       ...state,
@@ -114,9 +123,10 @@ function popularReducer(state, action) {
 }
 
 export default function Popular() {
-  const [selectedLanguage, setSelectedLanguage] = React.useState("All");
+  const [selectedLanguage, setSelectedLanguage] =
+    React.useState<Languages>("All");
   const [state, dispatch] = React.useReducer(popularReducer, { error: null });
-  const fetchedLanguages = React.useRef([]);
+  const fetchedLanguages = React.useRef<string[]>([]);
 
   React.useEffect(() => {
     if (fetchedLanguages.current.includes(selectedLanguage) === false) {
@@ -129,7 +139,7 @@ export default function Popular() {
   }, [fetchedLanguages, selectedLanguage]);
 
   const isLoading = () => !state[selectedLanguage] && state.error === null;
-
+  const selectedRepos = state[selectedLanguage];
   return (
     <>
       <LanguagesNav
@@ -138,7 +148,7 @@ export default function Popular() {
       />
       {isLoading() && <Loading text="Fetching Repos" />}
       {state.error && <p className="center-text error">{state.error}</p>}
-      {state[selectedLanguage] && <ReposGrid repos={state[selectedLanguage]} />}
+      {selectedRepos && <ReposGrid repos={selectedRepos} />}
     </>
   );
 }

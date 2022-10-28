@@ -1,5 +1,5 @@
 import React from "react";
-import { battle } from "../utils/api.ts";
+import { battle, Player, User } from "../utils/api";
 import {
   FaCompass,
   FaBriefcase,
@@ -11,7 +11,7 @@ import {
 import Card from "./Card";
 import PropTypes from "prop-types";
 import Loading from "./Loading";
-import Tooltip from "./Tooltip.tsx";
+import Tooltip from "./Tooltip";
 import queryString from "query-string";
 import { Link } from "react-router-dom";
 
@@ -37,7 +37,7 @@ const styles = {
   },
 };
 
-function ProfileList({ profile }) {
+function ProfileList({ profile }: { profile: User }) {
   return (
     <ul className="card-list">
       <li>
@@ -76,7 +76,18 @@ ProfileList.propTypes = {
   profile: PropTypes.object.isRequired,
 };
 
-function battleReducer(state, action) {
+interface BattleState {
+  loading: boolean;
+  error: null | string;
+  winner: Player | null;
+  loser: Player | null;
+}
+
+type BattleAction =
+  | { type: "success"; winner: Player; loser: Player }
+  | { type: "error"; message: string };
+
+function battleReducer(state: BattleState, action: BattleAction): BattleState {
   if (action.type === "success") {
     return {
       winner: action.winner,
@@ -90,10 +101,16 @@ function battleReducer(state, action) {
       error: action.message,
       loading: false,
     };
+  } else {
+    throw new Error("That action type isn't supported.");
   }
 }
 
-export default function Results({ location }) {
+export default function Results({
+  location,
+}: {
+  location: { search: string };
+}) {
   const { playerOne, playerTwo } = queryString.parse(location.search);
   const [state, dispatch] = React.useReducer(battleReducer, {
     winner: null,
@@ -103,7 +120,7 @@ export default function Results({ location }) {
   });
 
   React.useEffect(() => {
-    battle([playerOne, playerTwo])
+    battle([playerOne, playerTwo] as [string, string])
       .then((players) =>
         dispatch({ type: "success", winner: players[0], loser: players[1] })
       )
@@ -116,7 +133,7 @@ export default function Results({ location }) {
     return <Loading text="Battling" />;
   }
 
-  if (error) {
+  if (error || !winner || !loser) {
     return (
       <>
         <p className="center-text error">{error}</p>

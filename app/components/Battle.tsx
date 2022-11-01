@@ -109,7 +109,6 @@ function PlayerPreview({
           <img
             className="avatar-small"
             src={`https://github.com/${username}.png?size=200`}
-            alt={`Avatar for ${username}`}
           />
           <a href={`https://github.com/${username}`} className="link">
             {username}

@@ -41,8 +41,10 @@ function ProfileList({ profile }: { profile: User }) {
   return (
     <ul className="card-list">
       <li>
+        <Tooltip text="User's Name">
         <FaUser color="rgb(239, 115, 115)" size={22} />
         {profile.name}
+        </Tooltip>
       </li>
       {profile.location && (
         <li>

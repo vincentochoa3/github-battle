@@ -7,6 +7,7 @@ import ReposGrid from "./ReposGrid";
 interface PopularState extends Partial<Record<Languages, Repo[]>> {
   error: null | string;
 }
+
 type PopularReducerActions =
   | {
       type: "success";
@@ -14,6 +15,7 @@ type PopularReducerActions =
       repos: Repo[];
     }
   | { type: "error"; error: Error };
+
 function popularReducer(state: PopularState, action: PopularReducerActions) {
   if (action.type === "success") {
     return {
@@ -35,7 +37,7 @@ export default function Popular() {
   const [selectedLanguage, setSelectedLanguage] =
     React.useState<Languages>("All");
   const [state, dispatch] = React.useReducer(popularReducer, { error: null });
-  const fetchedLanguages = React.useRef<string[]>([]);
+  const fetchedLanguages = React.useRef<Languages[]>([]);
 
   React.useEffect(() => {
     if (fetchedLanguages.current.includes(selectedLanguage) === false) {

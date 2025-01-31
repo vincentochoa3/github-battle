@@ -7,47 +7,10 @@ import {
   FaCodeBranch,
   FaExclamationTriangle,
 } from "react-icons/fa";
+import LanguagesNav, { Languages } from "./LanguagesNav";
 import Card from "./Card";
 import Loading from "./Loading";
 import Tooltip from "./Tooltip";
-
-type Languages = "All" | "Javascript" | "Ruby" | "Java" | "CSS" | "Python";
-function LanguagesNav({
-  selected,
-  onUpdateLanguage,
-}: {
-  selected: Languages;
-  onUpdateLanguage: (lang: Languages) => void;
-}) {
-  const languages: Languages[] = [
-    "All",
-    "Javascript",
-    "Ruby",
-    "Java",
-    "CSS",
-    "Python",
-  ];
-  return (
-    <ul className="flex-center">
-      {languages.map((language) => (
-        <li key={language}>
-          <button
-            className="btn-clear nav-link"
-            style={language === selected ? { color: `red` } : undefined}
-            onClick={() => onUpdateLanguage(language)}
-          >
-            {language}
-          </button>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-LanguagesNav.propTypes = {
-  selected: PropTypes.string.isRequired,
-  onUpdateLanguage: PropTypes.func.isRequired,
-};
 
 function ReposGrid({ repos }: { repos: Repo[] }) {
   return (

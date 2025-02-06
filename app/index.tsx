@@ -8,7 +8,7 @@ import Loading from "./components/Loading";
 
 const Popular = React.lazy(() => import("./components/Popular"));
 const Battle = React.lazy(() => import("./components/Battle/Battle"));
-const Results = React.lazy(() => import("./components/Results"));
+const Results = React.lazy(() => import("./components/Results/Results"));
 
 function App() {
   const [theme, setTheme] = React.useState("dark");

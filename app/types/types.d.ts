@@ -35,3 +35,8 @@ export type UserTypes = {
   company?: string;
   html_url: string;
 };
+
+export type PlayerTypes = {
+  profile: UserTypes;
+  score: number;
+};

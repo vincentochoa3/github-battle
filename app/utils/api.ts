@@ -1,4 +1,4 @@
-import { RepoTypes, UserTypes } from "../types/types";
+import { PlayerTypes, RepoTypes, UserTypes } from "../types/types";
 
 const id = "YOUR_CLIENT_ID";
 const sec = "YOUR_SECRET_ID";
@@ -49,7 +49,7 @@ function calculateScore(followers: number, repos: RepoTypes[]) {
   return followers * 3 + getStarCount(repos);
 }
 
-function getUserData(player: string): Promise<Player> {
+function getUserData(player: string): Promise<PlayerTypes> {
   return Promise.all([getProfile(player), getRepos(player)]).then(
     ([profile, repos]) => ({
       profile,
@@ -58,12 +58,7 @@ function getUserData(player: string): Promise<Player> {
   );
 }
 
-export interface Player {
-  profile: UserTypes;
-  score: number;
-}
-
-function sortPlayers(players: Player[]) {
+function sortPlayers(players: PlayerTypes[]) {
   return players.sort((a, b) => b.score - a.score);
 }
 

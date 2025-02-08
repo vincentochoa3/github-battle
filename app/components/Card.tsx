@@ -1,6 +1,7 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import ThemeContext from "../contexts/theme";
+import { CardTypes } from "../types/types";
 
 export default function Card({
   header,
@@ -9,14 +10,7 @@ export default function Card({
   href,
   name,
   children,
-}: {
-  header: string;
-  subheader?: string;
-  avatar: string;
-  href: string;
-  name: string;
-  children: ReactNode;
-}) {
+}: CardTypes) {
   const theme = React.useContext(ThemeContext);
   return (
     <div className={`card bg-${theme}`}>

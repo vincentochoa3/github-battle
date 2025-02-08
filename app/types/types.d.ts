@@ -23,3 +23,15 @@ export type RepoTypes = {
   open_issues: number;
   stargazers_count: number;
 };
+
+export type UserTypes = {
+  id: string;
+  followers: number;
+  following: number;
+  login: string;
+  avatar_url: string;
+  name: string;
+  location?: string;
+  company?: string;
+  html_url: string;
+};

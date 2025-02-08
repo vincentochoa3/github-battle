@@ -8,9 +8,9 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import PropTypes from "prop-types";
-import { User } from "../../utils/api";
+import { UserTypes } from "../../types/types";
 
-export default function ProfileList({ profile }: { profile: User }) {
+export default function ProfileList({ profile }: { profile: UserTypes }) {
   return (
     <ul className="card-list">
       <li>

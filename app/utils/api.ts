@@ -1,4 +1,4 @@
-import { RepoTypes } from "../types/types";
+import { RepoTypes, UserTypes } from "../types/types";
 
 const id = "YOUR_CLIENT_ID";
 const sec = "YOUR_SECRET_ID";
@@ -12,19 +12,7 @@ function getErrorMsg(message: string, username: string) {
   return message;
 }
 
-export type User = {
-  id: string;
-  followers: number;
-  following: number;
-  login: string;
-  avatar_url: string;
-  name: string;
-  location?: string;
-  company?: string;
-  html_url: string;
-};
-
-function getProfile(username: string): Promise<User> {
+function getProfile(username: string): Promise<UserTypes> {
   return fetch(`https://api.github.com/users/${username}${params}`)
     .then((res) => res.json())
     .then((profile) => {
@@ -71,7 +59,7 @@ function getUserData(player: string): Promise<Player> {
 }
 
 export interface Player {
-  profile: User;
+  profile: UserTypes;
   score: number;
 }
 

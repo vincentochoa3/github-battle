@@ -1,13 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-
-export type Languages =
-  | "All"
-  | "Javascript"
-  | "Ruby"
-  | "Java"
-  | "CSS"
-  | "Python";
+import { Languages } from "../types/types";
 
 export default function LanguagesNav({
   selected,

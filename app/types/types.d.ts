@@ -6,3 +6,11 @@ export type CardTypes = {
   name: string;
   children: ReactNode;
 };
+
+export type Languages =
+  | "All"
+  | "Javascript"
+  | "Ruby"
+  | "Java"
+  | "CSS"
+  | "Python";

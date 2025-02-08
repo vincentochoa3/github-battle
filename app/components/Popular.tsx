@@ -1,10 +1,11 @@
 import React from "react";
-import { fetchPopularRepos, Repo } from "../utils/api";
-import LanguagesNav, { Languages } from "./LanguagesNav";
+import { fetchPopularRepos } from "../utils/api";
+import LanguagesNav from "./LanguagesNav";
 import Loading from "./Loading";
 import ReposGrid from "./ReposGrid";
+import { Languages, RepoTypes } from "../types/types";
 
-interface PopularState extends Partial<Record<Languages, Repo[]>> {
+interface PopularState extends Partial<Record<Languages, RepoTypes[]>> {
   error: null | string;
 }
 
@@ -12,7 +13,7 @@ type PopularReducerActions =
   | {
       type: "success";
       selectedLanguage: Languages;
-      repos: Repo[];
+      repos: RepoTypes[];
     }
   | { type: "error"; error: Error };
 

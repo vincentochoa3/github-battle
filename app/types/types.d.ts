@@ -14,3 +14,12 @@ export type Languages =
   | "Java"
   | "CSS"
   | "Python";
+
+export type RepoTypes = {
+  name: string;
+  owner: User;
+  html_url: string;
+  forks: number;
+  open_issues: number;
+  stargazers_count: number;
+};

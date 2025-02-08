@@ -1,3 +1,5 @@
+import { RepoTypes } from "../types/types";
+
 const id = "YOUR_CLIENT_ID";
 const sec = "YOUR_SECRET_ID";
 const params = `?client_id=${id}&client_secret=${sec}`;
@@ -10,7 +12,7 @@ function getErrorMsg(message: string, username: string) {
   return message;
 }
 
-export interface User {
+export type User = {
   id: string;
   followers: number;
   following: number;
@@ -20,7 +22,7 @@ export interface User {
   location?: string;
   company?: string;
   html_url: string;
-}
+};
 
 function getProfile(username: string): Promise<User> {
   return fetch(`https://api.github.com/users/${username}${params}`)
@@ -34,7 +36,7 @@ function getProfile(username: string): Promise<User> {
     });
 }
 
-function getRepos(username: string): Promise<Repo[]> {
+function getRepos(username: string): Promise<RepoTypes[]> {
   return fetch(
     `https://api.github.com/users/${username}/repos${params}&per_page=100`
   )
@@ -48,23 +50,14 @@ function getRepos(username: string): Promise<Repo[]> {
     });
 }
 
-export interface Repo {
-  name: string;
-  owner: User;
-  html_url: string;
-  forks: number;
-  open_issues: number;
-  stargazers_count: number;
-}
-
-function getStarCount(repos: Repo[]) {
+function getStarCount(repos: RepoTypes[]) {
   return repos.reduce(
     (count, { stargazers_count }) => count + stargazers_count,
     0
   );
 }
 
-function calculateScore(followers: number, repos: Repo[]) {
+function calculateScore(followers: number, repos: RepoTypes[]) {
   return followers * 3 + getStarCount(repos);
 }
 
@@ -103,6 +96,6 @@ export function fetchPopularRepos(language: string) {
       if (!data.items) {
         throw new Error(data.message);
       }
-      return data.items as Repo[];
+      return data.items as RepoTypes[];
     });
 }

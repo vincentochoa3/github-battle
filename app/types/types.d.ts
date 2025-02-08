@@ -40,3 +40,14 @@ export type PlayerTypes = {
   profile: UserTypes;
   score: number;
 };
+
+export type BattleStateTypes = {
+  loading: boolean;
+  error: null | string;
+  winner: PlayerTypes | null;
+  loser: PlayerTypes | null;
+};
+
+export type BattleAction =
+  | { type: "success"; winner: PlayerTypes; loser: PlayerTypes }
+  | { type: "error"; message: string };

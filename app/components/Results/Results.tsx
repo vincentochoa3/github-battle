@@ -1,10 +1,11 @@
 import React from "react";
-import { battle, Player } from "../../utils/api";
+import { battle } from "../../utils/api";
 import Card from "../Card";
 import Loading from "../Loading";
 import queryString from "query-string";
 import { Link } from "react-router-dom";
 import ProfileList from "./ProfileList";
+import { BattleAction, BattleStateTypes } from "../../types/types";
 
 const styles = {
   container: {
@@ -28,18 +29,10 @@ const styles = {
   },
 };
 
-interface BattleState {
-  loading: boolean;
-  error: null | string;
-  winner: Player | null;
-  loser: Player | null;
-}
-
-type BattleAction =
-  | { type: "success"; winner: Player; loser: Player }
-  | { type: "error"; message: string };
-
-function battleReducer(state: BattleState, action: BattleAction): BattleState {
+function battleReducer(
+  state: BattleStateTypes,
+  action: BattleAction
+): BattleStateTypes {
   if (action.type === "success") {
     return {
       winner: action.winner,

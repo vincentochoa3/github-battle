@@ -1,7 +1,7 @@
 import React from "react";
 import { fetchPopularRepos } from "../utils/api";
 import LanguagesNav from "./LanguagesNav";
-import Loading from "./Loading";
+import Loading from "./Loading/Loading";
 import ReposGrid from "./ReposGrid";
 import { Languages, RepoTypes } from "../types/types";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { battle } from "../../utils/api";
 import Card from "../Card";
-import Loading from "../Loading";
+import Loading from "../Loading/Loading";
 import queryString from "query-string";
 import { Link } from "react-router-dom";
 import ProfileList from "./ProfileList";

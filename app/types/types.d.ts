@@ -51,3 +51,15 @@ export type BattleStateTypes = {
 export type BattleAction =
   | { type: "success"; winner: PlayerTypes; loser: PlayerTypes }
   | { type: "error"; message: string };
+
+export interface PopularState extends Partial<Record<Languages, RepoTypes[]>> {
+  error: null | string;
+}
+
+export type PopularReducerActions =
+  | {
+      type: "success";
+      selectedLanguage: Languages;
+      repos: RepoTypes[];
+    }
+  | { type: "error"; error: Error };

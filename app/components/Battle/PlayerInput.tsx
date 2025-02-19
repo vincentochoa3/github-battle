@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import ThemeContext from "../../contexts/theme";
-import PropTypes from "prop-types";
 
 export default function PlayerInput({
   onSubmit,
@@ -46,8 +45,3 @@ export default function PlayerInput({
     </form>
   );
 }
-
-PlayerInput.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-};

@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 import { Languages } from "../types/types";
 
@@ -33,8 +32,3 @@ export default function LanguagesNav({
     </ul>
   );
 }
-
-LanguagesNav.propTypes = {
-  selected: PropTypes.string.isRequired,
-  onUpdateLanguage: PropTypes.func.isRequired,
-};

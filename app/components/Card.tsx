@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import ThemeContext from "../contexts/theme";
 import { CardTypes } from "../types/types";
 
@@ -26,11 +25,3 @@ export default function Card({
     </div>
   );
 }
-
-Card.propTypes = {
-  header: PropTypes.string.isRequired,
-  subheader: PropTypes.string,
-  avatar: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-};

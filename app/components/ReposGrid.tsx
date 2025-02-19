@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Card from "./Card";
 import Tooltip from "./ToolTip/Tooltip";
 import {
@@ -52,7 +51,3 @@ export default function ReposGrid({ repos }: { repos: RepoTypes[] }) {
     </ul>
   );
 }
-
-ReposGrid.propTypes = {
-  repos: PropTypes.array.isRequired,
-};
